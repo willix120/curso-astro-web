@@ -1,0 +1,18 @@
+---
+interface Props {
+    title: string,
+    patch: string | null,
+    details: string | null,
+    success: boolean
+}
+
+const { title, patch, details, success } = Astro.props;
+const launchStatus = success ? 'Success' : 'Failure';
+const moreDetails = details ? `${details?.slice(1, 200)}...` : '';
+---
+<div class="p-6 max-w-sm mx-auto bg-white rounded-xl mb-4 shadow-lg flex flex-col space-x-4 container">
+    <h4 class="text-black text-lg font-semibold">{ title }</h4>
+    <img class="aspect-square mb-4" src={patch} alt={title} />
+    <span class:list={["text-xs font-semibold mr-2 px-2.5 px-0.5 rounded max-w-fit mb-4",{"bg-green-400 text-green-900": success, "bg-red-400 text-red-900": !success}]}>{launchStatus}</span>
+    <p class="text-slate-600 text-sm">{moreDetails}</p>
+</div>
